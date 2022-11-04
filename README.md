@@ -9,20 +9,20 @@
 
 ## History
 
-Basketball is one of my passions and ever since I took my first steps toward Data Science, I always wondered what could I do with all that data.
+Basketball is one of my passions and ever since I took my first steps toward Data Science, I always wondered what I could do with all that data.
 
 > It's pronounced data, not data.
 
 My first real NBA data analysis was done using Power BI. I used it to check the players with the best stats and make some cool dashboards to visualize it.
-Of course, that's just too simple, but still, I had to begin from somewhere.
+Of course, that was just too simple, but still, I had to begin from somewhere.
 
 I learned how to code in Python as an evolution of the Power BI analysis. I used to download data from [Advanced Sports Analytics](https://www.advancedsportsanalytics.com/nba-raw-data)
-and after a lot of data processing, use some deep statistical analysis to understand mean, median, confidence intervals, yadda yadda yadda.
-Even though it was statistics textbook analysis and you could get some cool information, I was just going deep into statistic but focusing only on 
-the three main statistical categories of basketball: Points, Rebounds, and Assists.
+and after a lot of data processing, I used some statistical analysis to understand mean, median, confidence intervals, yadda yadda yadda.
+Even though it was statistics textbook analysis and you could get some cool information, I was only focusing on 
+the three main stats categories of basketball: Points, Rebounds, and Assists.
 
-However, if you download the raw data from the website above, you'll learn at least a dozen new statistical categories of basketball.
-Indeed there is a lot of data to keep you entertained for weeks, but nothing is better than getting data from the source. 
+However, if you download the raw data from the website above, you'll learn at least a dozen new basketball stats.
+Indeed there is a lot of data to keep you entertained for weeks, but nothing is better than getting it from the source. 
 
 
 
@@ -45,9 +45,9 @@ and more, of course!
 
 ## Goals
 
-- I will post some visual analysis on Tableau to showcase my Business Analysis skills - ~~hat number one~~
+- Post some visual analysis on Tableau to showcase my Business Analysis skills - ~~hat number one~~
 
-- Eventually, I will share some codes I used to get the information ready for analysis - ~~hat number two~~
+- Eventually, share some codes I used to get the information ready for analysis - ~~hat number two~~
 
 - The ultimate goal is to walk you all through the whole analysis
 
