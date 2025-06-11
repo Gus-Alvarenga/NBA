@@ -1,60 +1,43 @@
 # NBA
 
-<img src="https://user-images.githubusercontent.com/117409573/199850169-ffb2d631-c327-43d8-8d95-f6c44fafdbcc.png" height="400">
+This repository walks through the process of transforming text-based play-by-play data into dashboards filled with NBA player and team stats.
+
+**TL;DR:** Basketball Reference provides play-by-play data like the image below. This project transforms that data into NBA stats and displays them in Power BI dashboards.
+
+### Raw Data
+![Basketball Reference](https://github.com/gustavo-alvarenga/About-me/blob/main/NBA%20Raw%20Data.png)
+
+### Final Result (Click to view the interactive [dashboard](https://app.powerbi.com/view?r=eyJrIjoiZWVmYzRkYjAtMTU3OS00YTNhLWEzYTctMjA5M2U5OTE1NDU0IiwidCI6ImE2ZThmZmUwLTg1ZWYtNDBhMS1iMDU1LTUxNmU2YjY1ODJmMiJ9))
+![Twitch](https://github.com/Gus-Alvarenga/About-me/blob/main/nba%20dashboard.png)
+
+### Tools & Tech Used:
+* Python
+* Power BI
+
+## Step #1: Retrieve List of Links
+
+First, we need to retrieve the list of links. This [code](https://github.com/gustavo-alvarenga/NBA/blob/main/%231%20List%20of%20Links.py) starts from the initial set date (i.e., the first day of the season) and collects all relevant links from that point on.
+
+It's important to mention that we don’t want to send too many requests and risk exceeding their limits. Basketball Reference (as of the time of writing) allows 10 requests per minute. You can check this information [here](https://www.sports-reference.com/bot-traffic.html).
+
+All files will be saved locally for convenience.
+
+## Step #2: Retrieve and Process Data
+
+Now that we have the links, we're going to retrieve the play-by-play data and process it. Here's the [code](https://github.com/Gus-Alvarenga/NBA/blob/main/%232%20Retrieve%20and%20Process.py).
+
+## Step #3: Players Metadata
+
+To add a cherry on top, let’s also retrieve player metadata. You'll extract the unique players listed in the play-by-play data and gather additional info on them. Here's the [code](https://github.com/Gus-Alvarenga/NBA/blob/main/%233%20Players%20Metadata.py).
+
+## Step #4: Visualization
+
+Now that all the data has been retrieved, there’s a lot that can be done.
+
+In this visualization, the focus is on player performance, including overall stats, free throw accuracy (broken down by attempt number), performance against different opponents, and scoring by distance from the arc. You can take this further and include team analysis, matchup breakdowns, and more.
+
+Here's the [dashboard](https://app.powerbi.com/view?r=eyJrIjoiZWVmYzRkYjAtMTU3OS00YTNhLWEzYTctMjA5M2U5OTE1NDU0IiwidCI6ImE2ZThmZmUwLTg1ZWYtNDBhMS1iMDU1LTUxNmU2YjY1ODJmMiJ9)  
+![Twitch](https://github.com/Gus-Alvarenga/About-me/blob/main/nba%20dashboard.png)
 
 
-
-~~If you are in a hurry, just scroll down to the ***Source*** section.~~
-
-
-## History
-
-Basketball is one of my passions and ever since I took my first steps toward Data Science, I always wondered what I could do with all that data.
-
-> It's pronounced data, not data.
-
-My first real NBA data analysis was done using Power BI. I used it to check the players with the best stats and make some cool dashboards to visualize it.
-Of course, that was just too simple, but still, I had to begin from somewhere.
-
-I learned how to code in Python as an evolution of the Power BI analysis. I used to download data from [Advanced Sports Analytics](https://www.advancedsportsanalytics.com/nba-raw-data)
-and after a lot of data processing, I used some statistical analysis to understand mean, median, confidence intervals, yadda yadda yadda.
-Even though it was statistics textbook analysis and you could get some cool information, I was only focusing on 
-the three main stats categories of basketball: Points, Rebounds, and Assists.
-
-However, if you download the raw data from the website above, you'll learn at least a dozen new basketball stats.
-Indeed there is a lot of data to keep you entertained for weeks, but nothing is better than getting it from the source. 
-
-
-
-## Source
-
-If you are a NBA statistics enthusiast you know that all roads lead to ~~Rome~~ [Basketball Reference](https://www.basketball-reference.com/boxscores/), and that may be the
-best source to get raw data. Unless you are Santa Claus and will watch all NBA games on the same night all year long and get the stats yourself, who knows?
-
-So, this project will transform this
-
-<img src="https://github.com/gustavo-alvarenga/NBA/blob/cde664f217860c1a386511bbba0a0fd32cf725fa/Screenshot%202022-11-03%20195753.png" height="400">
-
-into
-
-<img src="https://github.com/gustavo-alvarenga/NBA/blob/592814d9e037dfe33ce172d99f5d1bb784bab920/Screenshot%202022-11-03%20194721.png" height="400">
-
-and more, of course!
-
-
-
-## Goals
-
-- Post some visual analysis on Tableau to showcase my Business Analysis skills - ~~hat number one~~
-
-- Eventually, share some codes I used to get the information ready for analysis - ~~hat number two~~
-
-- The ultimate goal is to walk you all through the whole analysis
-
-
-
-![image](https://safetymanagementgroup.com/wp-content/uploads/2020/08/wearingtwohats.jpg)
-
-
-
-
+You can reach out to me on [LinkedIn](https://www.linkedin.com/in/gustavo-alvarenga/)
