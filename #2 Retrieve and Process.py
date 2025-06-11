@@ -292,11 +292,11 @@ from IPython.display import clear_output
 start_time = time.time()
 
 # Load table of links
-df_games_link_path = r"C:\Users\gusta\Desktop\nba links.csv"
+df_games_link_path = "nba links.csv"
 df_games_link = pd.read_csv(df_games_link_path)
 
 # Define output path
-output_path = r"C:\Users\gusta\Desktop\pbp data.csv"
+output_path = "pbp data.csv"
 
 # Track requests and timing
 request_count = 0
