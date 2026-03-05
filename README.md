@@ -1,43 +1,99 @@
-# NBA
+# External Data -> Transform -> BI (Example Project)
 
-This repository walks through the process of transforming text-based play-by-play data into dashboards filled with NBA player and team stats.
+This repository demonstrates an end-to-end analytics workflow: collecting external web data, transforming text-based play-by-play into structured metrics, and exposing the results to BI dashboards.
+(Example source used here: Basketball Reference play-by-play pages.)
 
-**TL;DR:** Basketball Reference provides play-by-play data like the image below. This project transforms that data into NBA stats and displays them in Power BI dashboards.
+**TL;DR:** Basketball Reference provides play-by-play as text events. This project converts those events into player/team metrics (shots, free throws, scoring splits, opponent context, etc.) and visualizes them in Power BI.
 
 ### Raw Data
 ![Basketball Reference](https://github.com/gustavo-alvarenga/About-me/blob/main/NBA%20Raw%20Data.png)
 
-### Final Result (Click to view the interactive [dashboard](https://app.powerbi.com/view?r=eyJrIjoiZWVmYzRkYjAtMTU3OS00YTNhLWEzYTctMjA5M2U5OTE1NDU0IiwidCI6ImE2ZThmZmUwLTg1ZWYtNDBhMS1iMDU1LTUxNmU2YjY1ODJmMiJ9))
+### BI Dashboard (Example) (Click to view the interactive [dashboard](https://app.powerbi.com/view?r=eyJrIjoiZWVmYzRkYjAtMTU3OS00YTNhLWEzYTctMjA5M2U5OTE1NDU0IiwidCI6ImE2ZThmZmUwLTg1ZWYtNDBhMS1iMDU1LTUxNmU2YjY1ODJmMiJ9))
 ![Twitch](https://github.com/Gus-Alvarenga/About-me/blob/main/nba%20dashboard.png)
 
-### Tools & Tech Used:
+### Tech Stack:
 * Python
 * Power BI
 
+## Architecture (High Level)
+
+**Flow**
+1. **Collect (rate-limited):** Gather game URLs for a season/date range.
+2. **Extract:** Download play-by-play pages and parse text events into structured rows.
+3. **Transform:** Convert rows into analytics-ready metrics (player/team aggregates, splits, and derived fields).
+4. **Serve (BI):** Load outputs into Power BI for modeling and visualization.
+
+Source pages -> link list -> play-by-play extraction -> metrics tables (CSV) -> Power BI
+
+## Repository Contents
+
+- `collect_game_links.py` - Builds a list of game URLs for a selected date range/season.
+- `extract_transform_pbp.py` - Downloads play-by-play pages and transforms text events into structured metrics tables.
+- `enrich_player_metadata.py` - Extracts unique players from play-by-play and adds metadata for analysis.
+- `README.md` - Project overview and setup instructions.
+
+## Quickstart (Reproducible Setup)
+
+1. Create a virtual environment
+   - `python -m venv .venv`
+   - `source .venv/bin/activate` (Linux/Mac) or `.venv\Scripts\activate` (Windows)
+
+2. Install dependencies
+   - `pip install -r requirements.txt`
+
+3. Run the pipeline
+   - `python collect_game_links.py`
+   - `python extract_transform_pbp.py`
+   - `python enrich_player_metadata.py`
+
+## Required Configuration
+
+At minimum, you will need to set:
+- Season/date range parameters (as used in `collect_game_links.py`)
+- Output folder paths (if your scripts write files locally)
+
+Notes:
+- This project uses rate limiting to respect source-site request limits.
+
 ## Step #1: Retrieve List of Links
 
-First, we need to retrieve the list of links. This [code](https://github.com/gustavo-alvarenga/NBA/blob/main/%231%20List%20of%20Links.py) starts from the initial set date (i.e., the first day of the season) and collects all relevant links from that point on.
+This step builds the list of game URLs starting from a selected season start date and continuing forward.
 
-It's important to mention that we don’t want to send too many requests and risk exceeding their limits. Basketball Reference (as of the time of writing) allows 10 requests per minute. You can check this information [here](https://www.sports-reference.com/bot-traffic.html).
+Code: [collect_game_links.py](https://github.com/Gus-Alvarenga/NBA/blob/main/collect_game_links.py)
 
-All files will be saved locally for convenience.
+Notes:
+- Requests are rate-limited to respect Basketball Reference limits (10 requests/min at the time of writing). You can check this information [here](https://www.sports-reference.com/bot-traffic.html).
+- Outputs are saved locally for downstream steps.
 
 ## Step #2: Retrieve and Process Data
 
-Now that we have the links, we're going to retrieve the play-by-play data and process it. Here's the [code](https://github.com/Gus-Alvarenga/NBA/blob/main/%232%20Retrieve%20and%20Process.py).
+This step downloads play-by-play pages and converts text-based events into structured rows, then aggregates them into analytics-ready metrics.
+
+Code: [extract_transform_pbp.py](https://github.com/Gus-Alvarenga/NBA/blob/main/extract_transform_pbp.py)
+
+Process Workflow:
+* Read game URL list
+* Download play-by-play pages (rate-limited)
+* Parse text events into structured records
+* Generate metrics tables (CSV outputs) for BI
 
 ## Step #3: Players Metadata
 
-To add a cherry on top, let’s also retrieve player metadata. You'll extract the unique players listed in the play-by-play data and gather additional info on them. Here's the [code](https://github.com/Gus-Alvarenga/NBA/blob/main/%233%20Players%20Metadata.py).
+This step extracts unique players from the play-by-play dataset and enriches the analysis with additional player metadata.
+
+Code: [enrich_player_metadata.py](https://github.com/Gus-Alvarenga/NBA/blob/main/enrich_player_metadata.py)
 
 ## Step #4: Visualization
 
-Now that all the data has been retrieved, there’s a lot that can be done.
+Load the curated CSV outputs into Power BI, model relationships as needed, and build dashboards.
 
-In this visualization, the focus is on player performance, including overall stats, free throw accuracy (broken down by attempt number), performance against different opponents, and scoring by distance from the arc. You can take this further and include team analysis, matchup breakdowns, and more.
+This example dashboard focuses on:
+- Player performance (overall + splits)
+- Free throw accuracy (by attempt number)
+- Performance vs different opponents
+- Scoring by distance from the arc
 
-Here's the [dashboard](https://app.powerbi.com/view?r=eyJrIjoiZWVmYzRkYjAtMTU3OS00YTNhLWEzYTctMjA5M2U5OTE1NDU0IiwidCI6ImE2ZThmZmUwLTg1ZWYtNDBhMS1iMDU1LTUxNmU2YjY1ODJmMiJ9)  
-![Twitch](https://github.com/Gus-Alvarenga/About-me/blob/main/nba%20dashboard.png)
+Dashboard: [dashboard](https://app.powerbi.com/view?r=eyJrIjoiZWVmYzRkYjAtMTU3OS00YTNhLWEzYTctMjA5M2U5OTE1NDU0IiwidCI6ImE2ZThmZmUwLTg1ZWYtNDBhMS1iMDU1LTUxNmU2YjY1ODJmMiJ9)  
+![NBA](https://github.com/Gus-Alvarenga/About-me/blob/main/nba%20dashboard.png)
 
-
-You can reach out to me on [LinkedIn](https://www.linkedin.com/in/gustavo-alvarenga/)
+You can reach out to me on [LinkedIn](https://www.linkedin.com/in/gus-alvarenga/)
